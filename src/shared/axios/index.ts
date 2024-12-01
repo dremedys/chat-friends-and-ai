@@ -1,1 +1,1 @@
-export {axiosInstance} from './axios-instance.ts'
+export { axiosInstance } from './axios-instance.ts'
