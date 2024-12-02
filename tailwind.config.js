@@ -9,6 +9,8 @@ export default {
       colors: {
         'basic-white': '#FBFBFB',
         'basic-black': '#180A29',
+        'basic-gray': '#F2F1F4',
+        'basic-purple': '#9969FF',
       },
     },
   },
