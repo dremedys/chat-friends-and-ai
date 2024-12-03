@@ -67,9 +67,9 @@ export const RegisterPage = () => {
         />
 
         <p className="mb-2 text-xs text-gray-500">
-          Already have an account?
+          Already have an account?{' '}
           <Link className="text-blue-500" to={`${ROUTES.auth.index}/${ROUTES.auth.login}`}>
-            Register
+            Sign in
           </Link>
         </p>
         <Button type="submit">Sign up</Button>

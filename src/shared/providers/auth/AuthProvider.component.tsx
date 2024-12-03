@@ -4,8 +4,8 @@ import { CustomEvents } from 'src/shared/events'
 import { removeLocalStorageItems } from 'src/shared/utils'
 
 import { AuthContextType, AuthProviderProps, UserContext } from './types'
-import { useLogout } from '@/shared/api/auth.ts'
 import { STORAGE_KEYS } from '@/shared/constants'
+import { useLogout } from '@/shared/api/auth'
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 

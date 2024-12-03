@@ -9,9 +9,15 @@ export default {
       colors: {
         'basic-white': '#FBFBFB',
         'basic-black': '#180A29',
-        'basic-gray': '#F2F1F4',
+        'basic-gray': '#9AACB5',
         'basic-purple': '#9969FF',
+        'border-gray': '#9AACB5',
+        chat: '#EDEBEF',
       },
+    },
+    screens: {
+      tablet: '800px',
+      mobile: '480px',
     },
   },
   plugins: [flowbite.plugin()],

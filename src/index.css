@@ -11,6 +11,7 @@ body {
   background-color: theme('colors.basic-gray');
   overflow-x: hidden;
   scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
 }
 #root {
   display: flex;

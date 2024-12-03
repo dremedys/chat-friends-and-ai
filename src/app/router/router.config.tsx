@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { MainPage } from '@/pages/main'
+import { NoMessagesView } from 'src/pages/no-messages'
 import { LoginPage } from '@/pages/login'
 import { RegisterPage } from '@/pages/register'
 import { ROUTES } from '@/shared/constants/router.ts'
 import { Layout } from '@/widgets/layout'
 import { AuthLayout } from '@/widgets/auth-layout'
 import { ErrorBoundary } from '@/widgets/error-boundary'
+import { ChatWindow } from '@/widgets/chat-window'
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <MainPage />,
+            element: <NoMessagesView />,
+          },
+          {
+            path: '/:id',
+            element: <ChatWindow />,
           },
         ],
       },

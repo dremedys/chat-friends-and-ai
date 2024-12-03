@@ -5,4 +5,7 @@ export const ROUTES = {
     register: 'register',
     login: 'login',
   },
+  chat: {
+    index: '/:id',
+  },
 }
