@@ -4,12 +4,12 @@ import { useSearchUser } from '@/shared/api/user'
 import { useDebounce } from '@/shared/hooks/use-debounce'
 import { useNavigate } from 'react-router-dom'
 
-interface UserSearchModalProps {
+interface Props {
   isOpen: boolean
   onClose: () => void
 }
 
-export const UserSearchModal: React.FC<UserSearchModalProps> = ({ isOpen, onClose }) => {
+export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
   const [query, setQuery] = useState<string>('')
   const debouncedQuery = useDebounce(query, 500)
@@ -26,25 +26,32 @@ export const UserSearchModal: React.FC<UserSearchModalProps> = ({ isOpen, onClos
     navigate(`/${id}`)
   }
 
+  const renderContent = () => {
+    if (isPending) {
+      return <Spinner size="lg" />
+    }
+    if (!debouncedQuery.trim().length) {
+      return null
+    }
+    if (data?.data.length) {
+      return data?.data.map((user) => (
+        <div onClick={() => handleClickUser(user.id)} key={user.email} className="p-2 border-b">
+          <p className="font-semibold">{user.firstName}</p>
+          <p className="text-sm text-gray-500">{user.email}</p>
+        </div>
+      ))
+    } else {
+      return <div>User not found :(</div>
+    }
+  }
+
   return (
     <Modal show={isOpen} onClose={onClose}>
       <Modal.Header>New chat</Modal.Header>
       <Modal.Body>
         <TextInput placeholder="Enter email or name of user" value={query} onChange={(e) => setQuery(e.target.value)} />
-        {isPending ? (
-          <div className="flex justify-center mt-4">
-            <Spinner size="lg" />
-          </div>
-        ) : debouncedQuery.trim().length ? (
-          <ul className="mt-4">
-            {data?.data.map((user) => (
-              <div onClick={() => handleClickUser(user.id)} key={user.email} className="p-2 border-b">
-                <p className="font-semibold">{user.firstName}</p>
-                <p className="text-sm text-gray-500">{user.email}</p>
-              </div>
-            ))}
-          </ul>
-        ) : null}
+
+        <div className="flex justify-center mt-4 min-h-[300px]"> {renderContent()}</div>
       </Modal.Body>
     </Modal>
   )

@@ -27,7 +27,7 @@ export const ChatList = () => {
     <div
       className={`bg-basic-white ${userId ? 'hidden' : 'flex-1'} mobile:flex-[0.3]  mobile:block mobile:border-r border-border-gray`}
     >
-      <div className=" px-6 tablet:pl-10 flex items-center border-b border-border-gray text-2xl font-semibold h-[76px] flex">
+      <div className=" px-6 tablet:pl-10 flex items-center border-b border-border-gray text-2xl font-semibold h-[76px]">
         <span>Messages</span>
         <img
           src="https://cdn-icons-png.flaticon.com/512/6423/6423944.png"

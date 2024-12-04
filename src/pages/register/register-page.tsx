@@ -10,13 +10,14 @@ import { Link, useNavigate } from 'react-router-dom'
 export const RegisterPage = () => {
   const navigate = useNavigate()
 
-  const { handleSubmit, control } = useForm<AuthRegisterRequest>()
+  const { handleSubmit, control } = useForm<AuthRegisterRequest>({
+    defaultValues: { email: '', firstName: '', lastName: '', password: '' },
+  })
   const { mutateAsync } = useRegister()
   const { mutateAsync: loginMutate } = useLogin()
   const { setIsAuth } = useAuth()
 
   const onSubmit = handleSubmit((val) => {
-    console.log(val)
     mutateAsync(val).then(() => {
       loginMutate(val).then(() => {
         setIsAuth(true)
@@ -56,6 +57,7 @@ export const RegisterPage = () => {
         <Controller
           control={control}
           name="firstName"
+          rules={{ minLength: 1, maxLength: 50 }}
           render={({ field }) => <TextInput {...field} id="firstName" placeholder="Alan" required />}
         />
 
@@ -63,7 +65,16 @@ export const RegisterPage = () => {
         <Controller
           control={control}
           name="lastName"
-          render={({ field }) => <TextInput {...field} id="lastName" placeholder="Turing" required />}
+          rules={{ minLength: 1, maxLength: 50 }}
+          render={({ field, fieldState }) => (
+            <TextInput
+              {...field}
+              id="lastName"
+              placeholder="Turing"
+              required
+              helperText={<span>{fieldState.error?.message}</span>}
+            />
+          )}
         />
 
         <p className="mb-2 text-xs text-gray-500">
@@ -72,7 +83,9 @@ export const RegisterPage = () => {
             Sign in
           </Link>
         </p>
-        <Button type="submit">Sign up</Button>
+        <Button gradientDuoTone="purpleToBlue" type="submit">
+          Sign up
+        </Button>
       </form>
     </div>
   )

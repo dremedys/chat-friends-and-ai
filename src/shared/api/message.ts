@@ -6,7 +6,7 @@ export const useGetMessages = (userId?: string) => {
   return useQuery({
     queryFn: () =>
       axiosInstance.get<GetMessageResponseDto[]>(`/chat/history`, { params: { userId } }).then((res) => res.data),
-    queryKey: ['chat', userId],
+    queryKey: ['messages', userId],
     enabled: userId !== undefined,
     staleTime: Infinity,
   })

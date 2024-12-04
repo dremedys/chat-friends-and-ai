@@ -21,7 +21,7 @@ export const Chat: FC<Props> = ({ messages }) => {
   return (
     <div className="px-10 overflow-auto" id="chat" style={{ height: 'calc(100vh - 76px - 64px - 92px)' }} ref={ref}>
       {messages.length ? (
-        messages.map((msg) => <MessageItem key={msg.id} isFromMe={msg.fromUserId === myUserId} text={msg.content} />)
+        messages.map((msg) => <MessageItem key={msg.id} isFromMe={msg.fromUserId === myUserId} content={msg.content} />)
       ) : (
         <ChatListEmpty />
       )}

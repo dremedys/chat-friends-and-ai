@@ -6,13 +6,15 @@ import { STORAGE_KEYS } from '@/shared/constants'
 import { Link, useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/shared/constants/router'
 import { AuthLoginRequest } from '@/shared/types/auth'
+import { useAlert } from 'react-alert'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
 
-  const { handleSubmit, control, setError } = useForm<AuthLoginRequest>()
+  const { handleSubmit, control, setError } = useForm<AuthLoginRequest>({ defaultValues: { email: '', password: '' } })
   const { mutateAsync } = useLogin()
   const { setIsAuth } = useAuth()
+  const alert = useAlert()
 
   const onSubmit = handleSubmit((val) => {
     mutateAsync(val)
@@ -22,9 +24,10 @@ export const LoginPage = () => {
         navigate(ROUTES.index)
       })
       .catch((err) => {
-        console.log(err.response)
         if (err?.response?.data.message === 'invalid_credentials') {
           setError('email', { message: 'Invalid email or password :(' })
+        } else {
+          alert.error('Server error. Try Later')
         }
       })
   })
@@ -68,7 +71,9 @@ export const LoginPage = () => {
           Register
         </Link>
       </p>
-      <Button type="submit">Continue</Button>
+      <Button gradientDuoTone="purpleToBlue" type="submit">
+        Continue
+      </Button>
     </form>
   )
 }

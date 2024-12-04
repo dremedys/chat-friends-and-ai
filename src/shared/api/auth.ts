@@ -1,15 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/shared/axios'
 import { AuthLoginRequest, AuthRegisterRequest, GetProfileResponse } from '@/shared/types/auth'
-import { AxiosError } from 'axios'
 
 export const useLogin = () => {
   return useMutation({
     mutationFn: ({ email, password }: AuthLoginRequest) => axiosInstance.post('/auth/login', { email, password }),
-    throwOnError: (error: AxiosError<{ message: string }>) => {
-      const errorStatus = error?.response?.data.message
-      return errorStatus !== 'invalid_credentials'
-    },
   })
 }
 

@@ -8,7 +8,7 @@ body {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  background-color: theme('colors.basic-gray');
+  background-color: theme('colors.gray.100');
   overflow-x: hidden;
   scroll-behavior: smooth;
   font-family: 'Inter', sans-serif;
