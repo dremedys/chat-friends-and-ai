@@ -1,11 +1,11 @@
 import { Controller, useForm } from 'react-hook-form'
 import { Button, TextInput, Label } from 'flowbite-react'
-import { useLogin } from '@/shared/api/auth.ts'
+import { useLogin } from '@/shared/api/auth'
 import { useAuth } from '@/shared/providers'
 import { STORAGE_KEYS } from '@/shared/constants'
 import { Link, useNavigate } from 'react-router-dom'
-import { ROUTES } from '@/shared/constants/router.ts'
-import { AuthLoginRequest } from '@/shared/types/auth.ts'
+import { ROUTES } from '@/shared/constants/router'
+import { AuthLoginRequest } from '@/shared/types/auth'
 
 export const LoginPage = () => {
   const navigate = useNavigate()

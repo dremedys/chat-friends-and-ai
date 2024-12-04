@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 
-export const MessageInput: React.FC = () => {
+type Props = {
+  onSend: (value: string) => void
+}
+
+export const MessageInput: React.FC<Props> = ({ onSend }) => {
   const [message, setMessage] = useState('')
 
   const handleSendMessage = () => {
     const trimmed = message.replace(/^\s+/, '')
     if (trimmed.length) {
-      console.log('new message', trimmed)
+      onSend(trimmed)
     }
     setMessage('')
   }
@@ -19,6 +23,9 @@ export const MessageInput: React.FC = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         className="flex-grow border-none focus:outline-none text-gray-700 placeholder-gray-500 text-sm h-full"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') handleSendMessage()
+        }}
       />
       <button
         onClick={handleSendMessage}

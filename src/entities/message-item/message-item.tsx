@@ -2,8 +2,9 @@ import { FC } from 'react'
 
 type Props = {
   isFromMe: boolean
+  text: string
 }
-export const MessageItem: FC<Props> = ({ isFromMe }) => {
+export const MessageItem: FC<Props> = ({ isFromMe, text }) => {
   return (
     <div className={`flex ${isFromMe ? 'justify-end' : 'justify-start'} my-6`}>
       <div
@@ -11,7 +12,7 @@ export const MessageItem: FC<Props> = ({ isFromMe }) => {
           isFromMe ? 'bg-basic-purple text-white' : 'bg-gray-100 text-black'
         }`}
       >
-        Test
+        {text}
       </div>
     </div>
   )

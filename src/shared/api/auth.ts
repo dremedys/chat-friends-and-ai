@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/shared/axios'
-import { AuthLoginRequest, AuthRegisterRequest, GetProfileResponse } from '@/shared/types/auth.ts'
+import { AuthLoginRequest, AuthRegisterRequest, GetProfileResponse } from '@/shared/types/auth'
 import { AxiosError } from 'axios'
 
 export const useLogin = () => {
@@ -29,5 +29,6 @@ export const useGetProfile = (enabled: boolean) => {
     queryKey: ['me'],
     queryFn: () => axiosInstance.get<GetProfileResponse>('/profile/me').then((res) => res.data),
     throwOnError: false,
+    staleTime: Infinity,
   })
 }

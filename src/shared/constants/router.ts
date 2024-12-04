@@ -6,6 +6,6 @@ export const ROUTES = {
     login: 'login',
   },
   chat: {
-    index: '/:id',
+    index: '/:userId',
   },
 }

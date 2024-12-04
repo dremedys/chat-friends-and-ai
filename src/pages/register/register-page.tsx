@@ -1,9 +1,9 @@
 import { Button, TextInput, Label } from 'flowbite-react'
-import { useLogin, useRegister } from '@/shared/api/auth.ts'
+import { useLogin, useRegister } from '@/shared/api/auth'
 import { useAuth } from '@/shared/providers'
 import { STORAGE_KEYS } from '@/shared/constants'
-import { ROUTES } from '@/shared/constants/router.ts'
-import { AuthRegisterRequest } from '@/shared/types/auth.ts'
+import { ROUTES } from '@/shared/constants/router'
+import { AuthRegisterRequest } from '@/shared/types/auth'
 import { useForm, Controller } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 

@@ -1,5 +1,5 @@
 import { useAuth } from '@/shared/providers'
-import { ROUTES } from '@/shared/constants/router.ts'
+import { ROUTES } from '@/shared/constants/router'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { PropsWithChildren } from 'react'
 import { Header } from '@/widgets/header'

@@ -16,8 +16,8 @@ export default {
       },
     },
     screens: {
-      tablet: '800px',
-      mobile: '480px',
+      tablet: '1133px',
+      mobile: '431px',
     },
   },
   plugins: [flowbite.plugin()],

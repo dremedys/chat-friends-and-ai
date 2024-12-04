@@ -1,5 +1,5 @@
 import { Dispatch } from 'react'
-import { GetProfileResponse } from '@/shared/types/auth.ts'
+import { GetProfileResponse } from '@/shared/types/auth'
 
 export interface AuthContextType {
   isAuth: boolean

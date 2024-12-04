@@ -1,41 +1,54 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { MessageInput } from '@/features/message-input'
-import { MessageItem } from '@/entities/message-item'
+import { useGetUserById } from '@/shared/api/user'
+import { Chat } from '@/features/chat'
+import { GetMessageResponseDto, SendMessageRequest } from '@/shared/types/message'
+import { useGetProfile } from '@/shared/api/auth'
+import { useGetMessages } from '@/shared/api/message'
+import { ROUTES } from '@/shared/constants/router'
+import { useSocket } from '@/shared/providers'
+import { useEffect, useState } from 'react'
 
 export const ChatWindow = () => {
+  const { userId } = useParams()
+  const { data } = useGetProfile(true)
+  const { data: messagesData } = useGetMessages(userId)
+  const [messages, setMessages] = useState<GetMessageResponseDto[]>([])
+
+  useEffect(() => {
+    if (messagesData) setMessages(messagesData)
+  }, [messagesData])
+
+  const { data: user } = useGetUserById(userId ? Number(userId) : undefined)
+  const socket = useSocket()
+
+  const handleMessage = (content: string) => {
+    const body: SendMessageRequest = { content, toUserId: Number(userId), fromUserId: data?.id ?? 0 }
+
+    socket?.emit('message', body)
+  }
+
+  useEffect(() => {
+    socket?.on(`message`, (msg: GetMessageResponseDto) => {
+      if (data?.id === msg.fromUserId || data?.id === msg.toUserId) {
+        setMessages((prev) => [...prev, msg])
+      }
+    })
+  }, [socket, data])
+
   return (
-    <div className={`bg-chat flex-1 flex flex-col overflow-auto`}>
+    <div className="bg-chat flex-1 flex flex-col">
       <header className="px-6 tablet:px-10 py-[18px] bg-basic-white h-[76px] border-b border-border-gray flex items-start gap-x-1">
-        <Link to={'/'} className="tablet:hidden">
+        <Link to={ROUTES.index} className="tablet:hidden">
           <img src="back.svg" className="mt-[4px]" />
         </Link>
         <div>
-          <p className="text-lg">Alan Turing</p>
+          <p className="text-lg">{`${user?.firstName} ${user?.lastName}`}</p>
           <p className="text-gray-400">Online</p>
         </div>
       </header>
-      <div className="px-10 overflow-auto" style={{ height: 'calc(100vh - 76px - 64px - 92px)' }}>
-        <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} />
-        <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} /> <MessageItem isFromMe={false} />
-        <MessageItem isFromMe={true} />
-      </div>
-      <MessageInput />
+      <Chat messages={messages ?? []} />
+      <MessageInput onSend={handleMessage} />
     </div>
   )
 }

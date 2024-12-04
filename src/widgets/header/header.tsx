@@ -1,5 +1,5 @@
 import { Logo } from './logo'
-import { useGetProfile } from '@/shared/api/auth.ts'
+import { useGetProfile } from '@/shared/api/auth'
 import { useAuth } from '@/shared/providers'
 
 export const Header = () => {
@@ -13,7 +13,7 @@ export const Header = () => {
         <p>
           {data?.firstName} {data?.lastName}
         </p>
-        <p className="text-gray-400 cursor-pointer" onClick={handleLogout}>
+        <p className="text-gray-400 cursor-pointer text-end" onClick={handleLogout}>
           Logout
         </p>
       </div>

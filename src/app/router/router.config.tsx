@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { NoMessagesView } from 'src/pages/no-messages'
 import { LoginPage } from '@/pages/login'
 import { RegisterPage } from '@/pages/register'
-import { ROUTES } from '@/shared/constants/router.ts'
+import { ROUTES } from '@/shared/constants/router'
 import { Layout } from '@/widgets/layout'
 import { AuthLayout } from '@/widgets/auth-layout'
 import { ErrorBoundary } from '@/widgets/error-boundary'
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
             element: <NoMessagesView />,
           },
           {
-            path: '/:id',
+            path: ROUTES.chat.index,
             element: <ChatWindow />,
           },
         ],
