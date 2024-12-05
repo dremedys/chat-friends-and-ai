@@ -12,7 +12,7 @@ export const LoginPage = () => {
   const navigate = useNavigate()
 
   const { handleSubmit, control, setError } = useForm<AuthLoginRequest>({ defaultValues: { email: '', password: '' } })
-  const { mutateAsync } = useLogin()
+  const { mutateAsync, isPending } = useLogin()
   const { setIsAuth } = useAuth()
   const alert = useAlert()
 
@@ -71,7 +71,7 @@ export const LoginPage = () => {
           Register
         </Link>
       </p>
-      <Button gradientDuoTone="purpleToBlue" type="submit">
+      <Button gradientDuoTone="purpleToBlue" type="submit" isProcessing={isPending}>
         Continue
       </Button>
     </form>

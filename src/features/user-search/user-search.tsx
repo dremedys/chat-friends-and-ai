@@ -34,12 +34,31 @@ export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
       return null
     }
     if (data?.data.length) {
-      return data?.data.map((user) => (
-        <div onClick={() => handleClickUser(user.id)} key={user.email} className="p-2 border-b">
-          <p className="font-semibold">{user.firstName}</p>
-          <p className="text-sm text-gray-500">{user.email}</p>
-        </div>
-      ))
+      return (
+        <ul className="w-full">
+          {data?.data.map((user) => (
+            <li
+              onClick={() => handleClickUser(user.id)}
+              key={user.email}
+              className="p-2 border-b cursor-pointer border-chat border rounded-xl w-full flex justify-between items-center"
+            >
+              <div>
+                <p className="font-semibold">
+                  {user.firstName} {user.lastName}
+                </p>
+                <p className="text-sm text-gray-500">{user.email}</p>
+              </div>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/6423/6423944.png"
+                className="ml-auto cursor-pointer"
+                width={39}
+                height="auto"
+                title="New message"
+              />
+            </li>
+          ))}
+        </ul>
+      )
     } else {
       return <div>User not found :(</div>
     }

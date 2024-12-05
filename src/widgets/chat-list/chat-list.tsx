@@ -6,13 +6,14 @@ import { useGetChats } from '@/shared/api/message'
 import { useSocket } from '@/shared/providers'
 import { GetMessageResponseDto } from '@/shared/types/message'
 import { useGetProfile } from '@/shared/api/auth'
+import { Spinner } from 'flowbite-react'
 
 export const ChatList = () => {
   const { userId } = useParams()
   const socket = useSocket()
 
   const [isUserSearchModalOpen, setIsUserSearchModalOpen] = useState<boolean>(false)
-  const { data, refetch } = useGetChats()
+  const { data, refetch, isLoading } = useGetChats()
   const { data: profile } = useGetProfile(true)
 
   useEffect(() => {
@@ -37,9 +38,15 @@ export const ChatList = () => {
         />
       </div>
 
-      {data?.map((chat) => (
-        <ChatPreviewItem isActive={chat.user.id?.toString() === userId} chat={chat} key={chat.user.id} />
-      ))}
+      {isLoading ? (
+        <div className="bg-chat w-full h-full flex justify-center pt-[24px]">
+          <Spinner color="gray" />
+        </div>
+      ) : (
+        data?.map((chat) => (
+          <ChatPreviewItem isActive={chat.user.id?.toString() === userId} chat={chat} key={chat.user.id} />
+        ))
+      )}
 
       {isUserSearchModalOpen && (
         <UserSearchModal isOpen={isUserSearchModalOpen} onClose={() => setIsUserSearchModalOpen(false)} />

@@ -13,7 +13,7 @@ export const RegisterPage = () => {
   const { handleSubmit, control } = useForm<AuthRegisterRequest>({
     defaultValues: { email: '', firstName: '', lastName: '', password: '' },
   })
-  const { mutateAsync } = useRegister()
+  const { mutateAsync, isPending } = useRegister()
   const { mutateAsync: loginMutate } = useLogin()
   const { setIsAuth } = useAuth()
 
@@ -83,7 +83,7 @@ export const RegisterPage = () => {
             Sign in
           </Link>
         </p>
-        <Button gradientDuoTone="purpleToBlue" type="submit">
+        <Button gradientDuoTone="purpleToBlue" type="submit" isProcessing={isPending}>
           Sign up
         </Button>
       </form>

@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 export const ChatWindow = () => {
   const { userId } = useParams()
   const { data } = useGetProfile(true)
-  const { data: messagesData } = useGetMessages(userId)
+  const { data: messagesData, isLoading } = useGetMessages(userId)
   const [messages, setMessages] = useState<GetMessageResponseDto[]>([])
 
   useEffect(() => {
@@ -43,11 +43,11 @@ export const ChatWindow = () => {
           <img src="back.svg" className="mt-[4px]" />
         </Link>
         <div>
-          <p className="text-lg">{`${user?.firstName} ${user?.lastName}`}</p>
+          <p className="text-lg">{user ? `${user?.firstName} ${user?.lastName}` : 'Loading...'}</p>
           <p className="text-gray-400">Online</p>
         </div>
       </header>
-      <Chat messages={messages ?? []} />
+      <Chat messages={messages ?? []} isLoading={isLoading} />
       <MessageInput onSend={handleMessage} />
     </div>
   )

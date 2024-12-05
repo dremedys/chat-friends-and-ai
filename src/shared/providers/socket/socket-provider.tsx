@@ -16,6 +16,9 @@ export const SocketProvider: FC<PropsWithChildren> = ({ children }) => {
     socket?.on('connect', () => {
       console.log('connect!')
     })
+    socket?.on('connect_error', (e) => {
+      console.log('error', e)
+    })
 
     return () => {
       newSocket.disconnect()
