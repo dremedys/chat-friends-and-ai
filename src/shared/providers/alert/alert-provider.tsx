@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
-import { positions, transitions, Provider, AlertTemplateProps } from 'react-alert'
-import { Alert } from 'flowbite-react'
+import { positions, transitions, Provider } from 'react-alert'
+import { AlertCustomized } from './alert-customized.tsx'
 
 export const AlertProvider: FC<PropsWithChildren> = ({ children }) => {
   const options = {
@@ -10,21 +10,8 @@ export const AlertProvider: FC<PropsWithChildren> = ({ children }) => {
     transition: transitions.SCALE,
   }
   return (
-    <Provider template={AlertCustom} {...options}>
+    <Provider template={AlertCustomized} {...options}>
       {children}
     </Provider>
-  )
-}
-
-const AlertCustom: FC<AlertTemplateProps> = ({ close, options, message }) => {
-  const typeMap = {
-    info: 'info',
-    success: 'success',
-    error: 'failure',
-  }
-  return (
-    <Alert onDismiss={close} color={options.type ? typeMap[options.type] : 'info'} className="bottom-6">
-      {message}
-    </Alert>
   )
 }

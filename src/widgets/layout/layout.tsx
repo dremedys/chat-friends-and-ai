@@ -3,7 +3,7 @@ import { ROUTES } from '@/shared/constants/router'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { PropsWithChildren } from 'react'
 import { Header } from '@/widgets/header'
-import { ChatList } from '@/widgets/chat-list'
+import { ConversationList } from 'src/widgets/conversation-list'
 
 const PATH_FOR_NON_AUTHS = [ROUTES.auth.register, ROUTES.auth.login]
 
@@ -23,7 +23,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
     <div className="flex flex-col min-h-screen min-h-screen">
       <Header />
       <div className="content flex h-full items-stretch flex-1">
-        <ChatList />
+        <ConversationList />
         {children ?? <Outlet />}
       </div>
     </div>

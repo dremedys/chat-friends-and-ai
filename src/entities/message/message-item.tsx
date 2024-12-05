@@ -4,6 +4,7 @@ type Props = {
   isFromMe: boolean
   content: string
 }
+
 export const MessageItem: FC<Props> = ({ isFromMe, content }) => {
   return (
     <div className={`flex ${isFromMe ? 'justify-end' : 'justify-start'} my-6`}>

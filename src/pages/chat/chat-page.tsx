@@ -1,15 +1,15 @@
 import { Link, useParams } from 'react-router-dom'
 import { MessageInput } from '@/features/message-input'
-import { useGetUserById } from '@/shared/api/user'
+import { useGetUserById } from '@/shared/api/user.ts'
 import { Chat } from '@/features/chat'
-import { GetMessageResponseDto, SendMessageRequest } from '@/shared/types/message'
-import { useGetProfile } from '@/shared/api/auth'
-import { useGetMessages } from '@/shared/api/message'
-import { ROUTES } from '@/shared/constants/router'
+import { GetMessageResponseDto, SendMessageRequest } from '@/shared/types/message.ts'
+import { useGetProfile } from '@/shared/api/auth.ts'
+import { useGetMessages } from '@/shared/api/message.ts'
+import { ROUTES } from '@/shared/constants/router.ts'
 import { useSocket } from '@/shared/providers'
 import { useEffect, useState } from 'react'
 
-export const ChatWindow = () => {
+export const ChatPage = () => {
   const { userId } = useParams()
   const { data } = useGetProfile(true)
   const { data: messagesData, isLoading } = useGetMessages(userId)
@@ -48,7 +48,7 @@ export const ChatWindow = () => {
         </div>
       </header>
       <Chat messages={messages ?? []} isLoading={isLoading} />
-      <MessageInput onSend={handleMessage} />
+      <MessageInput onSubmit={handleMessage} />
     </div>
   )
 }

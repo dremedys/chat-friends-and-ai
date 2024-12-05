@@ -1,8 +1,8 @@
 import { GetMessageResponseDto } from '@/shared/types/message'
 import { useGetProfile } from '@/shared/api/auth'
 import { FC, useEffect, useRef } from 'react'
-import { MessageItem } from '@/entities/message-item'
-import { ChatListEmpty } from '@/features/chat/chat-list-empty.tsx'
+import { MessageItem } from 'src/entities/message'
+import { ChatEmpty } from './chat-empty.tsx'
 
 type Props = {
   messages: GetMessageResponseDto[]
@@ -24,7 +24,7 @@ export const Chat: FC<Props> = ({ messages, isLoading }) => {
       {isLoading ? null : messages.length ? (
         messages.map((msg) => <MessageItem key={msg.id} isFromMe={msg.fromUserId === myUserId} content={msg.content} />)
       ) : (
-        <ChatListEmpty />
+        <ChatEmpty />
       )}
     </div>
   )

@@ -7,7 +7,7 @@ import { AuthRegisterRequest } from '@/shared/types/auth'
 import { useForm, Controller } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 
-export const RegisterPage = () => {
+export const RegistrationPage = () => {
   const navigate = useNavigate()
 
   const { handleSubmit, control } = useForm<AuthRegisterRequest>({

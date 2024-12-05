@@ -1,19 +1,22 @@
-import { useParams } from 'react-router-dom'
-import { ChatPreviewItem } from 'src/entities/chat-preview'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ConversationItem } from 'src/entities/conversation'
 import { useEffect, useState } from 'react'
 import { UserSearchModal } from '@/features/user-search'
-import { useGetChats } from '@/shared/api/message'
+import { useGetConversations } from '@/shared/api/message'
 import { useSocket } from '@/shared/providers'
 import { GetMessageResponseDto } from '@/shared/types/message'
 import { useGetProfile } from '@/shared/api/auth'
 import { Spinner } from 'flowbite-react'
+import { useGetAiBotId } from '@/shared/api/ai.ts'
 
-export const ChatList = () => {
+export const ConversationList = () => {
   const { userId } = useParams()
+  const navigate = useNavigate()
   const socket = useSocket()
+  const { data: aiData } = useGetAiBotId()
 
   const [isUserSearchModalOpen, setIsUserSearchModalOpen] = useState<boolean>(false)
-  const { data, refetch, isLoading } = useGetChats()
+  const { data, refetch, isLoading } = useGetConversations()
   const { data: profile } = useGetProfile(true)
 
   useEffect(() => {
@@ -36,6 +39,13 @@ export const ChatList = () => {
           title="New message"
           onClick={() => setIsUserSearchModalOpen(true)}
         />
+        <span
+          className="py-[0.5px] px-2 text-basic-purple text-base font-semibold border-[2px] border-basic-purple rounded-xl cursor-pointer"
+          style={{ fontFamily: 'Georgia' }}
+          onClick={() => navigate(`/${aiData?.id}`)}
+        >
+          AI
+        </span>
       </div>
 
       {isLoading ? (
@@ -44,7 +54,7 @@ export const ChatList = () => {
         </div>
       ) : (
         data?.map((chat) => (
-          <ChatPreviewItem isActive={chat.user.id?.toString() === userId} chat={chat} key={chat.user.id} />
+          <ConversationItem isActive={chat.user.id?.toString() === userId} chat={chat} key={chat.user.id} />
         ))
       )}
 

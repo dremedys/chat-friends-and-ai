@@ -4,7 +4,7 @@ import { useSearchUser } from '@/shared/api/user'
 import { useDebounce } from '@/shared/hooks/use-debounce'
 import { useNavigate } from 'react-router-dom'
 
-interface Props {
+type Props = {
   isOpen: boolean
   onClose: () => void
 }

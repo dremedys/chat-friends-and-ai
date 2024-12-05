@@ -1,6 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/shared/axios'
-import { GetChatResponseDto, GetMessageResponseDto } from '@/shared/types/message'
+import { GetConversationResponseDto, GetMessageResponseDto } from '@/shared/types/message'
+
+export const useGetConversations = () => {
+  return useQuery({
+    queryFn: () => axiosInstance.get<GetConversationResponseDto[]>(`/chat/conversations`).then((res) => res.data),
+    queryKey: ['chats'],
+  })
+}
 
 export const useGetMessages = (userId?: string) => {
   return useQuery({
@@ -8,13 +15,6 @@ export const useGetMessages = (userId?: string) => {
       axiosInstance.get<GetMessageResponseDto[]>(`/chat/history`, { params: { userId } }).then((res) => res.data),
     queryKey: ['messages', userId],
     enabled: userId !== undefined,
-    staleTime: Infinity,
-  })
-}
-
-export const useGetChats = () => {
-  return useQuery({
-    queryFn: () => axiosInstance.get<GetChatResponseDto[]>(`/chat/conversations`).then((res) => res.data),
-    queryKey: ['chats'],
+    staleTime: 60_000 * 5,
   })
 }

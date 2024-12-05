@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 
 type Props = {
-  onSend: (value: string) => void
+  onSubmit: (value: string) => void
 }
 
-export const MessageInput: React.FC<Props> = ({ onSend }) => {
+export const MessageInput: React.FC<Props> = ({ onSubmit }) => {
   const [message, setMessage] = useState('')
 
   const handleSendMessage = () => {
-    const trimmed = message.replace(/^\s+/, '')
+    const trimmed = message.trim()
     if (trimmed.length) {
-      onSend(trimmed)
+      onSubmit(trimmed)
     }
     setMessage('')
   }
@@ -45,5 +45,3 @@ export const MessageInput: React.FC<Props> = ({ onSend }) => {
     </div>
   )
 }
-
-export default MessageInput

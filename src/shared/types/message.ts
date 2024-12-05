@@ -12,7 +12,7 @@ export type SendMessageRequest = {
   fromUserId: number
 }
 
-export type GetChatResponseDto = {
-  user: { id: number; firstName: string; lastName: string; email: string }
+export type GetConversationResponseDto = {
+  user: { id: number; firstName: string; lastName: string; email: string; isAI?: boolean }
   lastMessage: { content: string; timestamp: string }
 }

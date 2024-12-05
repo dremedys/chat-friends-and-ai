@@ -4,7 +4,7 @@ import { AuthLoginRequest, AuthRegisterRequest, GetProfileResponse } from '@/sha
 
 export const useLogin = () => {
   return useMutation({
-    mutationFn: ({ email, password }: AuthLoginRequest) => axiosInstance.post('/auth/login', { email, password }),
+    mutationFn: (body: AuthLoginRequest) => axiosInstance.post('/auth/login', body),
   })
 }
 
@@ -21,7 +21,7 @@ export const useLogout = () => {
 export const useGetProfile = (enabled: boolean) => {
   return useQuery({
     enabled,
-    queryKey: ['me'],
+    queryKey: ['my-profile'],
     queryFn: () => axiosInstance.get<GetProfileResponse>('/profile/me').then((res) => res.data),
     throwOnError: false,
     staleTime: Infinity,
