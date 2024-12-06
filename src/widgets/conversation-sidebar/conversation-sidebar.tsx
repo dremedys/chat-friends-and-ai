@@ -47,7 +47,7 @@ export const ConversationSidebar = () => {
       />
       <ConversationList
         conversations={conversations ?? []}
-        loading={!conversationsLoading}
+        loading={conversationsLoading}
         isChatOpen={isChatOpen}
         userId={userId}
       />
