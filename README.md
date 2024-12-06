@@ -7,7 +7,5 @@ Styling: [Tailwind](https://tailwindcss.com/) + [Flowbite](https://flowbite-reac
 How to launch:
 
 - Required: Node js v20.13.1, npm
-- `npm install --force`
+- `npm install`
 - `npm run dev`
-
-// npm force install, due to react-alert dependency problems :(
