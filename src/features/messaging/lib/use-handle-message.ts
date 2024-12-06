@@ -22,7 +22,7 @@ export const useHandleMessage = (
     socket?.on(`message`, socketHandler)
 
     return () => {
-      socket.off('message', socketHandler)
+      socket?.off('message', socketHandler)
     }
   }, [socket, currentUserId])
 

@@ -1,9 +1,9 @@
 import { GetMessageResponseWithStatus } from '@/entities/message'
-import { GetMessageResponseDto, SendMessageRequest } from '@/shared/types/message'
+import { SendMessageRequest } from '@/shared/types/message'
 import { Dispatch, SetStateAction } from 'react'
 import { useSendMessageQuery } from '@/shared/api/message'
 
-import { TEMP_MESSAGE_ID } from './constants'
+import { getRandomNegativeInteger } from '@/features/messaging/lib/utils.ts'
 
 export const useSendMessage = (
   messages: GetMessageResponseWithStatus[],
@@ -20,12 +20,8 @@ export const useSendMessage = (
   // Updating UI while message is being sent to server
   const pushTemporaryMessageWhileServerResponse = (body: SendMessageRequest) => {
     const timestamp = ''
-    const tempMessage = { ...body, fromUserId: currentUserId!, id: TEMP_MESSAGE_ID, timestamp }
+    const tempMessage = { ...body, fromUserId: currentUserId!, id: getRandomNegativeInteger(), timestamp }
     setMessages((prev) => [...prev, tempMessage])
-  }
-
-  const replaceTemporaryMessageToResponseMessageA = (data: GetMessageResponseDto) => {
-    setMessages((prev) => [...prev.slice(0, -1), data])
   }
 
   const handleSendMessage = async (content: string, isRetry?: boolean) => {
@@ -35,8 +31,8 @@ export const useSendMessage = (
     const body = { content, toUserId: userId! }
     pushTemporaryMessageWhileServerResponse(body)
     try {
-      const data = await postMessage(body)
-      replaceTemporaryMessageToResponseMessageA(data)
+      await postMessage(body)
+      // replaceTemporaryMessageToResponseMessageA(data)
     } catch (e) {
       console.log(e)
     }

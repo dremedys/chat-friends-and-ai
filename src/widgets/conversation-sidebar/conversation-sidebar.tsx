@@ -33,7 +33,7 @@ export const ConversationSidebar = () => {
     socket?.on('new_chat', socketHandler)
 
     return () => {
-      socket.off('new_chat', socketHandler)
+      socket?.off('new_chat', socketHandler)
     }
   }, [socket, profile?.id])
 
