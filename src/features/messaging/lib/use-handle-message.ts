@@ -15,10 +15,9 @@ export const useHandleMessage = (
 
   useEffect(() => {
     const socketHandler = (message: GetMessageResponseDto) => {
-      if (
-        (currentUserId === message.toUserId && userId === message.fromUserId) ||
-        (userId === message.toUserId && currentUserId === message.fromUserId)
-      ) {
+      // TODO Not safe :( Redo on server side.
+      const newMessageIsToCurrentUser = currentUserId === message.toUserId && userId === message.fromUserId
+      if (newMessageIsToCurrentUser) {
         setMessages((prev) => [...prev, message])
       }
     }

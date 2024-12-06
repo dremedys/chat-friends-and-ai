@@ -18,7 +18,7 @@ export const useSendMessage = (
   }
 
   // Updating UI while message is being sent to server
-  const pushTemporaryMessageWhileServerResponse = (body: SendMessageRequest) => {
+  const pushMessage = (body: SendMessageRequest) => {
     const timestamp = ''
     const tempMessage = { ...body, fromUserId: currentUserId!, id: getRandomNegativeInteger(), timestamp }
     setMessages((prev) => [...prev, tempMessage])
@@ -29,7 +29,7 @@ export const useSendMessage = (
       removeLastErrorMessage()
     }
     const body = { content, toUserId: userId! }
-    pushTemporaryMessageWhileServerResponse(body)
+    pushMessage(body)
     try {
       await postMessage(body)
       // replaceTemporaryMessageToResponseMessageA(data)
