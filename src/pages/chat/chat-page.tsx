@@ -30,6 +30,7 @@ export const ChatPage = () => {
         messages={messages ?? []}
         isLoading={isMessageHistoryLoading}
         errorState={{ isError: isPostMessageError, onRetry: handleResendMessageOnError }}
+        currentUserId={currentUser?.id}
       />
       <MessageInput
         disabled={isPostingMessage || isPostMessageError || isMessageHistoryLoading}

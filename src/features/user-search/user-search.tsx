@@ -11,9 +11,11 @@ type Props = {
 
 export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
+
+  const { data: usersResult, mutate: searchUserMutate, isPending } = useSearchUser()
+
   const [query, setQuery] = useState<string>('')
   const debouncedQuery = useDebounce(query, 500)
-  const { data: usersResult, mutate: searchUserMutate, isPending } = useSearchUser()
 
   useEffect(() => {
     if (debouncedQuery.trim().length > 0) {
@@ -68,7 +70,12 @@ export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
     <Modal show={isOpen} onClose={onClose}>
       <Modal.Header>New chat</Modal.Header>
       <Modal.Body>
-        <TextInput placeholder="Enter email or name of user" value={query} onChange={(e) => setQuery(e.target.value)} />
+        <TextInput
+          data-testid="user_search-input"
+          placeholder="Enter email or name of user"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
 
         <div className="flex justify-center mt-4 min-h-[300px]"> {renderContent()}</div>
       </Modal.Body>

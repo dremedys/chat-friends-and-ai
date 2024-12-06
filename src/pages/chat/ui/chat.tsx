@@ -1,4 +1,3 @@
-import { useGetProfile } from '@/shared/api/auth'
 import { FC, useEffect, useRef } from 'react'
 import { MessageItem, GetMessageResponseWithStatus } from '@/entities/message'
 
@@ -12,10 +11,10 @@ type Props = {
     isError: boolean
     onRetry: () => void
   }
+  currentUserId?: number
 }
 
-export const Chat: FC<Props> = ({ messages, isLoading, errorState }) => {
-  const { data: currentUser } = useGetProfile(true)
+export const Chat: FC<Props> = ({ messages, isLoading, errorState, currentUserId }) => {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export const Chat: FC<Props> = ({ messages, isLoading, errorState }) => {
           <MessageItem
             isError={msg.isError}
             key={msg.id}
-            isFromMe={msg.fromUserId === currentUser?.id}
+            isFromMe={msg.fromUserId === currentUserId}
             content={msg.content}
           />
         ))

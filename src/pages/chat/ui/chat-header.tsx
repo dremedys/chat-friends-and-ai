@@ -6,10 +6,11 @@ import { ROUTES } from '@/shared/constants/router'
 type Props = {
   user?: GetProfileResponse
 }
+
 export const ChatHeader: FC<Props> = ({ user }) => {
   return (
-    <header className="px-6 tablet:px-10 py-[18px] bg-basic-white h-[76px] border-b border-border-gray flex items-start gap-x-1">
-      <Link to={ROUTES.index} className="tablet:hidden">
+    <header className="px-6 mobile:px-10 py-[18px] bg-basic-white h-[76px] border-b border-border-gray flex items-start gap-x-1">
+      <Link to={ROUTES.index} className="mobile:hidden" data-testid="back_btn">
         <img src="back.svg" className="mt-[4px]" />
       </Link>
       <div>
