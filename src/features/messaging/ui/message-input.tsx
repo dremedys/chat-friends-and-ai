@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast'
 
 type Props = {
   onSubmit: (content: string) => void
@@ -12,6 +13,8 @@ export const MessageInput: React.FC<Props> = ({ onSubmit, disabled }) => {
     const trimmed = message.trim()
     if (trimmed.length) {
       onSubmit(trimmed)
+    } else {
+      toast.error('No empty messages', { icon: '👀' })
     }
     setMessage('')
   }

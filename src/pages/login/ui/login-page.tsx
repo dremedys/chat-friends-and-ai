@@ -6,7 +6,7 @@ import { STORAGE_KEYS } from '@/shared/constants'
 import { Link, useNavigate } from 'react-router-dom'
 import { ROUTES } from '@/shared/constants/router'
 import { AuthLoginRequest } from '@/shared/types/auth'
-import { useAlert } from 'react-alert'
+import toast from 'react-hot-toast'
 
 export const LoginPage = () => {
   const navigate = useNavigate()
@@ -14,7 +14,6 @@ export const LoginPage = () => {
   const { handleSubmit, control, setError } = useForm<AuthLoginRequest>({ defaultValues: { email: '', password: '' } })
   const { mutateAsync, isPending } = useLogin()
   const { setIsAuth } = useAuth()
-  const alert = useAlert()
 
   const onSubmit = handleSubmit((val) => {
     mutateAsync(val)
@@ -27,11 +26,10 @@ export const LoginPage = () => {
         if (err?.response?.data.message === 'invalid_credentials') {
           setError('email', { message: 'Invalid email or password :(' })
         } else {
-          alert.error('Server error. Try Later')
+          toast.error('Server error. Try Later')
         }
       })
   })
-
   return (
     <form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
       <div>

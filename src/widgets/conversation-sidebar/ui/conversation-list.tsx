@@ -13,7 +13,7 @@ type Props = {
 export const ConversationList: FC<Props> = ({ conversations, loading, isChatOpen, userId }) => {
   return (
     <div
-      className={`bg-basic-white ${isChatOpen ? 'hidden' : 'flex-1'} mobile:max-w-[30vw] mobile:flex-auto mobile:block mobile:border-r border-border-gray`}
+      className={`bg-basic-white h-full ${isChatOpen ? 'hidden' : 'flex-1'} mobile:max-w-[30vw] mobile:flex-auto mobile:block mobile:border-r border-border-gray`}
     >
       {loading ? (
         <div className="bg-chat w-full h-full flex justify-center pt-[24px]">
