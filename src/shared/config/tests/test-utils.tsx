@@ -4,7 +4,7 @@ import { render, renderHook, RenderHookOptions, RenderOptions } from '@testing-l
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
-import { AlertProvider, AuthProvider } from '../../providers'
+import { AuthProvider } from '../../providers'
 
 export const testQueryClient = new QueryClient({
   defaultOptions: {
@@ -23,11 +23,9 @@ function customRender<
   return render<Q, Container, BaseElement>(ui, {
     wrapper: ({ children }) => (
       <QueryClientProvider client={testQueryClient}>
-        <AlertProvider>
-          <AuthProvider>
-            <BrowserRouter>{children}</BrowserRouter>
-          </AuthProvider>
-        </AlertProvider>
+        <AuthProvider>
+          <BrowserRouter>{children}</BrowserRouter>
+        </AuthProvider>
       </QueryClientProvider>
     ),
     ...options,
@@ -47,11 +45,9 @@ function customRenderHook<
   return renderHook(hookResult, {
     wrapper: ({ children }) => (
       <QueryClientProvider client={testQueryClient}>
-        <AlertProvider>
-          <AuthProvider>
-            <BrowserRouter>{children}</BrowserRouter>
-          </AuthProvider>
-        </AlertProvider>
+        <AuthProvider>
+          <BrowserRouter>{children}</BrowserRouter>
+        </AuthProvider>
       </QueryClientProvider>
     ),
     ...options,
