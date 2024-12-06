@@ -27,7 +27,7 @@ export const useHandleMessage = (
     return () => {
       socket?.off('message', socketHandler)
     }
-  }, [socket, currentUserId])
+  }, [socket, currentUserId, userId])
 
   const fetchInitialMessageHistory = async () => {
     try {
