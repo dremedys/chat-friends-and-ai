@@ -15,7 +15,10 @@ export const useHandleMessage = (
 
   useEffect(() => {
     const socketHandler = (message: GetMessageResponseDto) => {
-      if (currentUserId === message.toUserId) {
+      if (
+        (currentUserId === message.toUserId && userId === message.fromUserId) ||
+        (userId === message.toUserId && currentUserId === message.fromUserId)
+      ) {
         setMessages((prev) => [...prev, message])
       }
     }

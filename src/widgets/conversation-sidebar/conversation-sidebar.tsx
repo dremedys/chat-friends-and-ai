@@ -25,7 +25,7 @@ export const ConversationSidebar = () => {
   useEffect(() => {
     const socketHandler = (message: GetMessageResponseDto) => {
       // TODO Not safe :( Redo on server side.
-      const newMessageIsForCurrentChat = message.fromUserId === profile?.id || message.fromUserId === profile?.id
+      const newMessageIsForCurrentChat = message.fromUserId === profile?.id || message.toUserId === profile?.id
       if (newMessageIsForCurrentChat) {
         refetchConversations()
       }
