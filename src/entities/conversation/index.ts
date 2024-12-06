@@ -1,1 +1,1 @@
-export { ConversationItem } from './conversation-item.tsx'
+export { ConversationItem } from './conversation-item'

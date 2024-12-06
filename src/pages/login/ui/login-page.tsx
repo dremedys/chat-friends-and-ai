@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form'
 import { Button, TextInput, Label } from 'flowbite-react'
-import { useLogin } from '@/shared/api/auth'
+import { useLogin } from '@/shared/api/auth.ts'
 import { useAuth } from '@/shared/providers'
 import { STORAGE_KEYS } from '@/shared/constants'
 import { Link, useNavigate } from 'react-router-dom'
@@ -68,7 +68,7 @@ export const LoginPage = () => {
       <p className="mb-2 text-xs text-gray-500">
         Don't have an account?{' '}
         <Link className="text-blue-500" to={`${ROUTES.auth.index}/${ROUTES.auth.register}`}>
-          Register
+          Sign up
         </Link>
       </p>
       <Button gradientDuoTone="purpleToBlue" type="submit" isProcessing={isPending}>

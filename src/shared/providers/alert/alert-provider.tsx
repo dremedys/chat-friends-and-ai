@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 import { positions, transitions, Provider } from 'react-alert'
-import { AlertCustomized } from './alert-customized.tsx'
+import { AlertCustomized } from './alert-customized'
 
 export const AlertProvider: FC<PropsWithChildren> = ({ children }) => {
   const options = {

@@ -1,1 +1,1 @@
-export { ChatPage } from './chat-page.tsx'
+export { ChatPage } from './chat-page'

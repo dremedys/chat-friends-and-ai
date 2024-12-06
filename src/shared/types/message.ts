@@ -9,7 +9,6 @@ export type GetMessageResponseDto = {
 export type SendMessageRequest = {
   content: string
   toUserId: number
-  fromUserId: number
 }
 
 export type GetConversationResponseDto = {

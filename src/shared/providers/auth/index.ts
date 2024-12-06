@@ -1,2 +1,2 @@
-export { AuthProvider } from './auth-provider.tsx'
+export { AuthProvider } from './auth-provider'
 export { useAuth } from './hooks'

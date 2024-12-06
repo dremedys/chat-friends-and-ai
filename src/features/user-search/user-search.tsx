@@ -13,11 +13,11 @@ export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
   const [query, setQuery] = useState<string>('')
   const debouncedQuery = useDebounce(query, 500)
-  const { data, mutate, isPending } = useSearchUser()
+  const { data: usersResult, mutate: searchUserMutate, isPending } = useSearchUser()
 
   useEffect(() => {
     if (debouncedQuery.trim().length > 0) {
-      mutate(debouncedQuery.trim())
+      searchUserMutate(debouncedQuery.trim())
     }
   }, [debouncedQuery])
 
@@ -28,19 +28,19 @@ export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const renderContent = () => {
     if (isPending) {
-      return <Spinner size="lg" />
+      return <Spinner color="purple" size="xl" />
     }
     if (!debouncedQuery.trim().length) {
       return null
     }
-    if (data?.data.length) {
+    if (usersResult?.data.length) {
       return (
         <ul className="w-full">
-          {data?.data.map((user) => (
+          {usersResult?.data.map((user) => (
             <li
               onClick={() => handleClickUser(user.id)}
               key={user.email}
-              className="p-2 border-b cursor-pointer border-chat border rounded-xl w-full flex justify-between items-center"
+              className="p-2 border-b cursor-pointer border-chat border rounded-xl w-full flex justify-between items-center mb-4"
             >
               <div>
                 <p className="font-semibold">
@@ -60,7 +60,7 @@ export const UserSearchModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </ul>
       )
     } else {
-      return <div>User not found :(</div>
+      return <p>User not found :(</p>
     }
   }
 
